@@ -40,10 +40,11 @@ def main(argv):
 
     peps = []
     for dirpath, dirnames, filenames in os.walk(args.pepsdir):
-        for filename in filenames:
-            if filename.endswith(('.rst', '.txt')):
-                peps.append(os.path.join(dirpath, filename))
-
+        peps.extend(
+            os.path.join(dirpath, filename)
+            for filename in filenames
+            if filename.endswith(('.rst', '.txt'))
+        )
     counts = {term: 0 for term in TERMS}
 
     for pep in peps:
@@ -52,8 +53,8 @@ def main(argv):
         text = ' '.join(re.findall('\w+', content.lower()))
         #text = ' '.join(content.lower().replace('.'), ' ').split())
         for term in TERMS:
-            n = text.count(' ' + term + ' ')
-            m = text.count(' ' + term + 'es ')
+            n = text.count(f' {term} ')
+            m = text.count(f' {term}es ')
             counts[term] += n + m
 
     for term in sorted(TERMS):

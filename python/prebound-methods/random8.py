@@ -20,7 +20,7 @@ set_seed = _instance.set_seed
 
 nums = set()
 
-for i in range(2550):
+for _ in range(2550):
     n = _instance.random()
     nums.add(n)
 
