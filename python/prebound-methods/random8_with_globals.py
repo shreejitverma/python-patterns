@@ -15,7 +15,7 @@ def random():
 
 nums = set()
 
-for i in range(2550):
+for _ in range(2550):
     n = random()
     nums.add(n)
 
